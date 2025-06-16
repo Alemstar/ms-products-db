@@ -77,19 +77,10 @@ public class ProductService {
 
     public ResponseEntity<String> insertProduct(ProductDTO productDTO){
 
-        Optional<Product> productId = productRepository.findById(productDTO.getIdProduct());
-        Optional<Product> productName = productRepository.findByName(productDTO.getProductName());
+        Optional<Product> productName = productRepository.findByProductName(productDTO.getProductName());
 
-        if(productId.isPresent()  && productName.isPresent()){
-            return ResponseEntity.status(HttpStatus.CONFLICT).body("The product Id and the product Name do already exists.");
-        }
-
-        else if(productId.isPresent()){
-            return ResponseEntity.status(HttpStatus.CONFLICT).body("The product Id does already exists.");
-
-        }
-
-        else if(productName.isPresent()){
+        
+        if (productName.isPresent()){
             return ResponseEntity.status(HttpStatus.CONFLICT).body("The product Name does already exists.");
         }
 
@@ -114,7 +105,7 @@ public class ProductService {
 
     public ResponseEntity<String> updateProduct(ProductDTO productDTO){
         Optional<Product> productId = productRepository.findById(productDTO.getIdProduct());
-        Optional<Product> productName = productRepository.findByName(productDTO.getProductName());
+        Optional<Product> productName = productRepository.findByProductName(productDTO.getProductName());
 
         if(!productId.isPresent()){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("The product cannot be updated because it doesn't exist.");
@@ -123,8 +114,6 @@ public class ProductService {
         Product updateProduct = productId.get();
 
         if (productId.isPresent() && productName.isPresent()){
-                /*updateProduct.setIdProduct(productDTO.getIdProduct());
-                updateProduct.setProductName(productDTO.getProductName());*/
                 updateProduct.setPrice(productDTO.getPrice());
                 updateProduct.setStock(productDTO.getStock());
                 productRepository.save(updateProduct);
