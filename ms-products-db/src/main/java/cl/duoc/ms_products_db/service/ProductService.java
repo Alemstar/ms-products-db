@@ -23,14 +23,22 @@ public class ProductService {
 
         ProductDTO productDTO = new ProductDTO();
         productDTO.setIdProduct(product.getIdProduct());
+        productDTO.setCode(product.getCode());
         productDTO.setProductName(product.getProductName());
+        productDTO.setDescripcion(product.getDescripcion());
         productDTO.setPrice(product.getPrice());
         productDTO.setStock(product.getStock());
+        productDTO.setCategoriaId(product.getCategoriaId());
+        productDTO.setImagen(product.getImagen());
+        productDTO.setPersonalizable(product.isPersonalizable());
+        productDTO.setMaxMsgChars(product.getMaxMsgChars());
+        productDTO.setTipoForma(product.getTipoForma());
+        productDTO.setTamanosDisponibles(product.getTamanosDisponibles());
 
         return productDTO;
     }
 
-    public ProductDTO getProductById(Long idProduct){
+    public ProductDTO getProductById(String idProduct){
 
         Optional<Product> product = productRepository.findById(idProduct);
 
@@ -49,9 +57,17 @@ public class ProductService {
         for (Product prod: product){
             productDTO = new ProductDTO();
             productDTO.setIdProduct(prod.getIdProduct());
+            productDTO.setCode(prod.getCode());
             productDTO.setProductName(prod.getProductName());
+            productDTO.setDescripcion(prod.getDescripcion());
             productDTO.setPrice(prod.getPrice());
             productDTO.setStock(prod.getStock());
+            productDTO.setCategoriaId(prod.getCategoriaId());
+            productDTO.setImagen(prod.getImagen());
+            productDTO.setPersonalizable(prod.isPersonalizable());
+            productDTO.setMaxMsgChars(prod.getMaxMsgChars());
+            productDTO.setTipoForma(prod.getTipoForma());
+            productDTO.setTamanosDisponibles(prod.getTamanosDisponibles());
 
             listDTO.add(productDTO);
         }
@@ -68,24 +84,38 @@ public class ProductService {
     public Product translateDtoToEntity(ProductDTO productDTO){
         Product product = new Product();
         product.setIdProduct(productDTO.getIdProduct());
+        product.setCode(productDTO.getCode());
         product.setProductName(productDTO.getProductName());
+        product.setDescripcion(productDTO.getDescripcion());
         product.setPrice(productDTO.getPrice());
         product.setStock(productDTO.getStock());
+        product.setCategoriaId(productDTO.getCategoriaId());
+        product.setImagen(productDTO.getImagen());
+        product.setPersonalizable(productDTO.isPersonalizable());
+        product.setMaxMsgChars(productDTO.getMaxMsgChars());
+        product.setTipoForma(productDTO.getTipoForma());
+        product.setTamanosDisponibles(productDTO.getTamanosDisponibles());
 
         return product;
     }
 
     public ResponseEntity<String> insertProduct(ProductDTO productDTO){
 
-        Optional<Product> productName = productRepository.findByProductName(productDTO.getProductName());
+        // Verificar si el código ya existe
+        if (productDTO.getCode() == null || productDTO.getCode().isEmpty()) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Product code is required.");
+        }
 
+        Optional<Product> existingProduct = productRepository.findById(productDTO.getCode());
         
-        if (productName.isPresent()){
-            return ResponseEntity.status(HttpStatus.CONFLICT).body("The product Name does already exists.");
+        if (existingProduct.isPresent()){
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("The product code already exists.");
         }
 
         else{
             Product newProduct = translateDtoToEntity(productDTO);
+            // Asignar el code como ID del producto
+            newProduct.setIdProduct(productDTO.getCode());
             productRepository.save(newProduct);
 
             return ResponseEntity.ok("Product created.");
@@ -93,7 +123,7 @@ public class ProductService {
 
     }
 
-    public ResponseEntity<String> deleteProduct(Long idProduct){
+    public ResponseEntity<String> deleteProduct(String idProduct){
         Optional<Product> product = productRepository.findById(idProduct);
         if(product.isPresent()){
         productRepository.deleteById(idProduct);

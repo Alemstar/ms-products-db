@@ -10,7 +10,7 @@ import cl.duoc.ms_products_db.model.entities.Product;
 
 
 @Repository
-public interface ProductRepository extends JpaRepository<Product, Long> {
+public interface ProductRepository extends JpaRepository<Product, String> {
     
     Optional<Product> findByProductName (String productName);
 }

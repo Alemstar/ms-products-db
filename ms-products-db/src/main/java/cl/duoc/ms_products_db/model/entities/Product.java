@@ -19,14 +19,40 @@ import lombok.ToString;
 public class Product {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "product_id")
-    private Long idProduct;
+    private String idProduct;
+    
+    @Column(name = "code")
+    private String code;
+    
     @Column(name = "product_name")
     private String productName;
+    
+    @Column(name = "descripcion")
+    private String descripcion;
+    
     @Column(name = "price")
     private int price;
+    
     @Column(name = "stock")
     private int stock;
+    
+    @Column(name = "categoria_id")
+    private String categoriaId;
+    
+    @Column(name = "imagen")
+    private String imagen;
+    
+    @Column(name = "personalizable")
+    private boolean personalizable;
+    
+    @Column(name = "max_msg_chars")
+    private int maxMsgChars;
+    
+    @Column(name = "tipo_forma")
+    private String tipoForma;
+    
+    @Column(name = "tamanos_disponibles")
+    private String tamanosDisponibles;
     
 }
