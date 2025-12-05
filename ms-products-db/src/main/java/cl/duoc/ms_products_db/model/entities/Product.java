@@ -2,8 +2,6 @@ package cl.duoc.ms_products_db.model.entities;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.Getter;
@@ -19,10 +17,7 @@ import lombok.ToString;
 public class Product {
 
     @Id
-    @Column(name = "product_id")
-    private String idProduct;
-    
-    @Column(name = "code")
+    @Column(name = "code", unique = true)
     private String code;
     
     @Column(name = "product_name")
@@ -37,8 +32,8 @@ public class Product {
     @Column(name = "stock")
     private int stock;
     
-    @Column(name = "categoria_id")
-    private String categoriaId;
+    @Column(name = "categoria")
+    private String categoria;
     
     @Column(name = "imagen")
     private String imagen;

@@ -15,9 +15,6 @@ import lombok.ToString;
 @ToString
 
 public class ProductDTO {
-    @JsonProperty(value = "product_id")
-    private String idProduct;
-
     @JsonProperty(value = "code")
     private String code;
 
@@ -33,8 +30,8 @@ public class ProductDTO {
     @JsonProperty(value = "stock")
     private int stock;
 
-    @JsonProperty(value = "categoriaId")
-    private String categoriaId;
+    @JsonProperty(value = "categoria")
+    private String categoria;
 
     @JsonProperty(value = "imagen")
     private String imagen;

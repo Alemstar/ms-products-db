@@ -33,9 +33,9 @@ public class ProductController {
         return productService.selectAllProduct();
     }
 
-    @GetMapping("/GetProductById/{idProduct}")
-    public ProductDTO getProductById(@PathVariable("idProduct") String idProduct){
-        return productService.getProductById(idProduct);
+    @GetMapping("/GetProductByCode/{code}")
+    public ProductDTO getProductByCode(@PathVariable("code") String code){
+        return productService.getProductById(code);
     }
 
     @PostMapping("/insertProduct")
@@ -43,9 +43,9 @@ public class ProductController {
         return productService.insertProduct(productDTO);
     }
 
-    @DeleteMapping("/DeleteProductById/{idProduct}")
-    public ResponseEntity<String> deleteProduct(@PathVariable("idProduct") String idProduct){
-        return productService.deleteProduct(idProduct);
+    @DeleteMapping("/DeleteProductByCode/{code}")
+    public ResponseEntity<String> deleteProduct(@PathVariable("code") String code){
+        return productService.deleteProduct(code);
     }
 
     @PutMapping("/UpdateProduct")
