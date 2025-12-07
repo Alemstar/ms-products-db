@@ -39,7 +39,7 @@ public class Product {
     private String imagen;
     
     @Column(name = "personalizable")
-    private boolean personalizable;
+    private Boolean personalizable;
     
     @Column(name = "max_msg_chars")
     private int maxMsgChars;

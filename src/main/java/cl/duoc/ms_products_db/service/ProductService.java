@@ -29,9 +29,10 @@ public class ProductService {
         productDTO.setStock(product.getStock());
         productDTO.setCategoria(product.getCategoria());
         productDTO.setImagen(product.getImagen());
-        productDTO.setPersonalizable(product.isPersonalizable());
+        productDTO.setPersonalizable(product.getPersonalizable());
         productDTO.setMaxMsgChars(product.getMaxMsgChars());
         productDTO.setTipoForma(product.getTipoForma());
+        productDTO.setTamanosDisponibles(product.getTamanosDisponibles());
         productDTO.setTamanosDisponibles(product.getTamanosDisponibles());
 
         return productDTO;
@@ -62,7 +63,7 @@ public class ProductService {
             productDTO.setStock(prod.getStock());
             productDTO.setCategoria(prod.getCategoria());
             productDTO.setImagen(prod.getImagen());
-            productDTO.setPersonalizable(prod.isPersonalizable());
+            productDTO.setPersonalizable(prod.getPersonalizable());
             productDTO.setMaxMsgChars(prod.getMaxMsgChars());
             productDTO.setTipoForma(prod.getTipoForma());
             productDTO.setTamanosDisponibles(prod.getTamanosDisponibles());
@@ -88,7 +89,7 @@ public class ProductService {
         product.setStock(productDTO.getStock());
         product.setCategoria(productDTO.getCategoria());
         product.setImagen(productDTO.getImagen());
-        product.setPersonalizable(productDTO.isPersonalizable());
+        product.setPersonalizable(productDTO.getPersonalizable());
         product.setMaxMsgChars(productDTO.getMaxMsgChars());
         product.setTipoForma(productDTO.getTipoForma());
         product.setTamanosDisponibles(productDTO.getTamanosDisponibles());

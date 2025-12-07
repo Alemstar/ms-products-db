@@ -37,7 +37,7 @@ public class ProductDTO {
     private String imagen;
 
     @JsonProperty(value = "personalizable")
-    private boolean personalizable;
+    private Boolean personalizable;
 
     @JsonProperty(value = "maxMsgChars")
     private int maxMsgChars;
