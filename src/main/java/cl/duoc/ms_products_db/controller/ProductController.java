@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import cl.duoc.ms_products_db.model.dto.ProductDTO;
 import cl.duoc.ms_products_db.service.ProductService;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,6 +24,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 
 @RestController
 @RequestMapping("/api/products")
+@CrossOrigin(origins = "*")
 public class ProductController {
 
     @Autowired
@@ -33,8 +35,13 @@ public class ProductController {
         return productService.selectAllProduct();
     }
 
-    @GetMapping("/GetProductByCode/{code}")
+    @GetMapping("/{code}")
     public ProductDTO getProductByCode(@PathVariable("code") String code){
+        return productService.getProductById(code);
+    }
+
+    @GetMapping("/GetProductByCode/{code}")
+    public ProductDTO getProductByCodeLegacy(@PathVariable("code") String code){
         return productService.getProductById(code);
     }
 
